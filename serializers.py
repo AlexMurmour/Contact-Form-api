@@ -12,30 +12,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
-# class AccountSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Account
-#         fields = ('id', 'email', 'login', '')
+
 
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = ('email', 'tags', 'geolocation', 'coin', 'plan', 'place', 'antitag', 'user', 'instuser', 'instpass')
+        fields = ('email', 'text',  'user')
 
 
-    # def save(self, contact):
-    #     send_mail('subject', contact.instuser, contact.instpass, contact.email, ['gotdrat@mail.ru'])
-    #     contact = Contact.objects.create(**validated_data)
-    #
-    #     # email = self.validated_data['email']
-    #     # geolocation = self.validated_data['geolocation']
-    #     # coin = self.validated_data['coin']
-    #     # plan = self.validated_data['plan']
-    #     # tags = self.validated_data['message']
-    #     # antitag = self.validated_data['antitag']
-    #     # user = self.validated_data['user']
-    #     # instuser = self.validated_data['instuser']
-    #     # instpass = self.validated_data['instpass']
-    #     send_mail('subject', contact.instuser, contact.instpass, contact.email, ['gotdrat@mail.ru'])
-    #     return contact
+   
