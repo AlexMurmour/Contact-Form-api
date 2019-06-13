@@ -54,12 +54,6 @@ class CustomObtainAuthToken(ObtainAuthToken):
         return Response({'token':token.key, 'user':serializer.data})
 
 
-# for admin all contacts
-# class ContactList(viewsets.ModelViewSet):
-#     queryset = Contact.objects.all()
-#     serializer_class = ContactSerializer
-#     permission_classes = (IsAdminUser, )
-#     # authentication_classes = (TokenAuthentication, SessionAuthentication)
 
 class ContactView(viewsets.ModelViewSet):
     serializer_class = ContactSerializer
@@ -78,13 +72,13 @@ class ContactView(viewsets.ModelViewSet):
         if request.method == "POST":
             response = super(ContactView, self).create(request, *args, **kwargs)
             subject = "new contact"
-            instuser = request.POST.get("instuser")
-            instpass = request.POST.get("instpass")
             email = request.POST.get("email")
-            message = "{0} from user with instagram {1} with password {2}".format(email, instuser, instpass)
+            text = request.POST.get("text")
+            user = request.POST.get("user")
+            message = "You have a message from user {0} with email {1}: {2}".format(user, email, text)
 
             email_from = settings.EMAIL_HOST_USER
-            send_mail(subject, message, email_from, ['covinuricray@gmail.com'], fail_silently=False,)
+            send_mail(subject, message, email_from, ['example@gmail.com'], fail_silently=False,)
             return response
 
 
